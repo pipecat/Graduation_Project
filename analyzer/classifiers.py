@@ -10,7 +10,7 @@ class DictClassifier:
     def __init__(self):
         self.__root_filepath = "dict/"
 
-        jieba.load_userdict("dict/user.dict")
+        jieba.load_userdict("dict/user2.dict")
 
         self.__positive_dict = self.__get_dict(self.__root_filepath + "positive_dict.txt")
         self.__negative_dict = self.__get_dict(self.__root_filepath + "negative_dict.txt")
@@ -22,7 +22,7 @@ class DictClassifier:
     def classify(self, sentence):
         return self.analyse_sentence(sentence)
 
-    def analyse_sentence(self, sentence, runout_filepath=None, print_show=False):
+    def analyse_sentence(self, sentence):
         sentence_analysis = {
             "score": 0
         }
@@ -30,7 +30,8 @@ class DictClassifier:
         the_clauses = self.__divide_sentence_into_clauses(sentence + '%')
 
         for i in range(len(the_clauses)):
-            sub_clause = self.__analyse_clause(the_clauses['i'].replace("。", "."))
+            #print("__analyse_clause[{}]: {}".format(i,the_clauses[i].replace("。", ".")))
+            sub_clause = self.__analyse_clause(the_clauses[i].replace("。", "."))
 
             sentence_analysis["su-clause" + str(i)] = sub_clause
             sentence_analysis["score"] += sub_clause["score"]
@@ -40,7 +41,7 @@ class DictClassifier:
         else:
             return sentence_analysis["score"]
 
-    def __analyse_clause(self, the_clauses, runout_filepath, print_show):
+    def __analyse_clause(self, the_clause):
         sub_clause = {
             "score": 0,
             "positive": [],
@@ -51,15 +52,18 @@ class DictClassifier:
         }
         seg_result = posseg.lcut(the_clause)
 
+        '''
         if runout_filepath is not None:
             self.__write_runout_file(runout_filepath, the_clause + '\n')
             self.__write_runout_file(runout_filepath, str(seg_result) + '\n')
         if print_show:
             print(the_clause)
             print(seg_result)
+        '''
 
         for i in range(len(seg_result)):
             mark, result = self.__analyse_word(seg_result[i].word, seg_result, i)
+            #print('word({})result:{}type:{}'.format(seg_result[i].word, result, mark))
             if mark == 0:
                 continue
             elif mark == 1:
@@ -96,12 +100,12 @@ class DictClassifier:
             return 2, judgement
 
         #positive word
-        judgement = self.__is_word_positive(the_word)
+        judgement = self.__is_word_positive(the_word, seg_result, index)
         if judgement != '':
             return 3, judgement
 
         #negative word
-        judgement = self.__is_word_negative(the_word)
+        judgement = self.__is_word_negative(the_word, seg_result, index)
         if judgement != '':
             return 4, judgement
 
@@ -112,7 +116,7 @@ class DictClassifier:
             conjunction = {"key": the_word, "value": self.__conjunction_dict[the_word]}
             return conjunction
         #不在词典内则返回空
-        return ""
+        return ''
 
     def __is_word_punctuation(self, the_word):
         if the_word in self.__punctuation_dict:
@@ -122,13 +126,17 @@ class DictClassifier:
             }
             return punctuation
         #不在词典内则返回空
-        return ""
+        return ''
+
     def __is_word_positive(self, the_word, seg_result, index):
         if the_word in self.__positive_dict:
             return self.__emotional_word_analysis(the_word, self.__positive_dict[the_word], [x for x, y in seg_result], index)
+        return ''
+
     def __is_word_negative(self, the_word, seg_result, index):
         if the_word in self.__negative_dict:
             return self.__emotional_word_analysis(the_word, self.__negative_dict[the_word], [x for x, y in seg_result], index)
+        return ''
 
     def __emotional_word_analysis(self, core_word, value, segments, index):
         #在情感词典内则构建一个以情感词典为中心的字典数据结构
@@ -262,7 +270,7 @@ class DictClassifier:
         sentiment_dict = {}
         pattern = re.compile(r"\s+")
         with open(path, encoding=encoding) as f:
-            for lin in f:
+            for line in f:
                 result = pattern.split(line.strip())
                 if len(result) == 2:
                     sentiment_dict[result[0]] = float(result[1])
