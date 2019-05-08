@@ -143,7 +143,7 @@ class DictClassifier:
         orientation = {
             "key": core_word,
             "adverb": [],
-            "denail": [],
+            "denial": [],
             "value": value
         }
         orientation_score = orientation["value"]
