@@ -1,7 +1,7 @@
 f_dict = open("dict/BosonNLP_sentiment_score/BosonNLP_sentiment_score.txt", "r")
-f_positive = open("dict/positive_dict2.txt", "wt")
-f_negative = open("dict/negative_dict2.txt", "wt")
-f_user = open("dict/user2.dict", "wt")
+f_positive = open("dict/positive_dict.txt", "wt")
+f_negative = open("dict/negative_dict.txt", "wt")
+f_user = open("dict/user.dict", "wt")
 
 for line in f_dict:
     data = line.strip().split()[0]

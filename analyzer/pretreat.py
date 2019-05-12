@@ -4,9 +4,9 @@ import json
 result_sentences = set()
 end_ = ['?', '!', '.', '。']
 
-f_sentences = open("sentences.txt", 'wt')
+f_sentences = open("txt/sentences.txt", 'wt')
 
-f_news = open("news-0502.json", 'r')
+f_news = open("txt/news-0502.json", 'r')
 data = json.loads(f_news.read())
 f_news.close()
 
@@ -20,7 +20,7 @@ for news in data:
         result_sentences.add(sentence)
         print("Get sentence: '{}'".format(sentence))
 
-f_news = open("news-0504.json", 'r')
+f_news = open("txt/news-0504.json", 'r')
 data = json.loads(f_news.read())
 f_news.close()
 
