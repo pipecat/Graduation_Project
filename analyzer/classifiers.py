@@ -165,12 +165,12 @@ class DictClassifier:
                 orientation["adverb"].append(adverb)
                 orientation_score *= self.__adverb_dict[segments[view_window]]
             elif segments[view_window] in self.__denial_dict: #判断是否是否定词
-                denail = {
+                denial = {
                     "key": segments[view_window],
                     "position": 1,
                     "value": self.__denial_dict[segments[view_window]]
                 }
-                orientation["denail"].append(denail)
+                orientation["denial"].append(denial)
                 orientation_score *= -1
         view_window = index -2
         if view_window > -1:
@@ -226,11 +226,11 @@ class DictClassifier:
             for i in range(len(the_clauses)):
                 if the_clauses[i] in match.group(2):
                     to_delete.append(i)
-                if len(to_delete) > 0:
-                    for i in range(len(to_delete)):
-                        the_clauses.remove(the_clauses[to_delete[0]])
-                            #the_clauses[to_delete[i]]
-                    the_clauses.insert(to_delete[0], match.group(2))
+            if len(to_delete) > 0:
+                for i in range(len(to_delete)):
+                    the_clauses.remove(the_clauses[to_delete[0]])
+                        #the_clauses[to_delete[i]]
+                the_clauses.insert(to_delete[0], match.group(2))
 
         pattern = re.compile(r"([，%。、！；？?,!～~.… ]*)([\u4e00-\u9fa5]*?(如果|要是|希望).+就[\u4e00-\u9fa5]+(好|完美)了[，。；！%、？?,!～~.… ]+)")
         match = re.search(pattern, the_sentence.strip())
