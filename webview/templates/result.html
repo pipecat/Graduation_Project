@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>新闻文本分析结果</title>
+    <!-- 引入 echarts.js -->
+    	
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div class="container">
+        <h1>新闻文本人物言论分析</h1>
+
+        
+        <div class="row">
+            <div class="col-md-10 center-block">
+            <p class="lead">
+                通过基于卡方检验的特征提取，我们获得了在朴素贝叶斯分类器中对句子积极性相关性最强的前几名的词语，分别是：<mark>阶段</mark>，
+                <mark>榜样</mark>，
+                <mark>区间</mark>，
+                <mark>之中</mark>，
+                <mark>充满信心</mark>，
+                <mark>问题</mark>，
+                <mark>开心</mark>，
+                <mark>自豪</mark>，
+                <mark>热点</mark>等。
+                可以看出，这些词汇要么是特定语境下的新闻常用词（如热点、榜样），要么是具有明显情感极性的词语（如开心），要么二者兼具（自豪），体现出了一定的新闻文本的特殊性。接下来，我们对不同类别的新闻文本人物言论进行简单分类。
+            </p>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+    <h2>1.整体新闻文本分析</h2>
+    <p class="lead bg-info">整体新闻文本中的积极言论举例：</p>
+    <ul>
+        <li>
+            <blockquote>
+                    我们来了以后，给园区带动了人气。附近甚至开始有农民摆摊了。
+            </blockquote>
+        </li>
+        <li>
+            <blockquote>
+                    要积极弘扬奉献精神，凝聚起万众一心奋斗新时代的强大力量。
+            </blockquote>
+        </li>
+        <li>
+            <blockquote>
+                    甚至安排人每周定时向谢华民家配送新鲜蔬菜瓜果。
+            </blockquote>
+        </li>
+    </ul>
+    <p class="lead bg-danger">整体新闻文本中的消极言论举例：</p>
+    <ul>
+            <li>
+                <blockquote>
+                        怎么进来？孩子上学难，没户口买不了车，还要缴很高的税收。
+                </blockquote>
+            </li>
+            <li>
+                <blockquote>
+                        我到现在都有心理阴影，人家一敲我车门，我就紧张。
+                </blockquote>
+            </li>
+            <li>
+                <blockquote>
+                        也就是大家平时说的路怒症。
+                </blockquote>
+            </li>
+        </ul>
+    <p class="lead">整体新闻文本积极句子积极与消极占比如下图所示：</p>
+    <div id="main" class="center-block" style="width: 400px;height:400px;text-align: center"></div>
+    <p class="lead">整体新闻文本人物言论生成词云如下图所示：</p>
+    <div align="center"><img src="all.png" alt="" id="img1"></div>
+            </div>
+            <div class="col-md-6">
+    <h2>2.时事类新闻文本言论分析</h2>
+    <p class="lead bg-info">时事类新闻文本中的积极言论举例：</p>
+    <ul>
+        <li>
+            <blockquote>
+                    要向张富清学习，保持信念之光不灭，信仰之树常青。
+            </blockquote>
+        </li>
+        <li>
+            <blockquote>
+                    中部地区崛起势头正劲，中部地区发展大有可为。
+            </blockquote>
+        </li>
+        <li>
+            <blockquote>
+                    在知识产权史上，中国完成所有这一切的速度是独一无二的。
+            </blockquote>
+        </li>
+    </ul>
+    <p class="lead bg-danger">时事类新闻文本中的消极言论举例：</p>
+    <ul>
+            <li>
+                <blockquote>
+                        真的就在最后一颗螺丝被紧紧固定在地面上的时候，台风来了。
+                </blockquote>
+            </li>
+            <li>
+                <blockquote>
+                        所谓的暗访，还没有开始就成为明察了。
+                </blockquote>
+            </li>
+            <li>
+                <blockquote>
+                        长期以来，三附院一直存在收受药材供应商回扣的问题。
+                </blockquote>
+            </li>
+        </ul>
+    <p class="lead">整体新闻文本积极句子积极与消极占比如下图所示：</p>
+    <div id="now" class="center-block" style="width: 400px;height:400px;text-align: center" align="center"></div>
+    <p class="lead">时事新闻文本人物言论生成词云如下图所示：</p>
+    <div align="center"><img src="now.png" alt="" id="img2"></div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+    <h2>3.经济类新闻文本言论分析</h2>
+    <p class="lead bg-info">经济类新闻文本中的积极言论举例：</p>
+    <ul>
+        <li>
+            <blockquote>
+                    成立营销公司，能防止权力更加集中，促进健康发展。
+            </blockquote>
+        </li>
+        <li>
+            <blockquote>
+                    节奏快了，小批量订单多了，企业生产模式更智能，灵活度更高。
+            </blockquote>
+        </li>
+        <li>
+            <blockquote>
+                    华为是我们非常敬佩的企业，任正非是大智慧的企业家。
+            </blockquote>
+        </li>
+    </ul>
+    <p class="lead bg-danger">经济类新闻文本中的消极言论举例：</p>
+    <ul>
+            <li>
+                <blockquote>
+                        除了整个行业现在还没有实现盈利以外，新的一些情况又在发生。
+                </blockquote>
+            </li>
+            <li>
+                <blockquote>
+                        导致这种情况极大可能是因为对狂犬疫苗产生的过敏性反应。
+                </blockquote>
+            </li>
+            <li>
+                <blockquote>
+                        中国经济注定是卖空者的噩梦。
+                </blockquote>
+            </li>
+        </ul>
+    <p class="lead">经济新闻文本积极句子积极与消极占比如下图所示：</p>
+    <div id="ecnomic" class="center-block" style="width: 400px;height:400px;" align="center"></div>
+    <p class="lead">经济新闻文本人物言论生成词云如下图所示：</p>
+    <div align="center"><img src="ecnomic.png" alt="" id="img3"></div>
+            </div>
+    <div class="col-md-6">
+    <h2>4.生活类新闻文本言论分析</h2>
+    <p class="lead bg-info">生活类新闻文本中的消极言论举例：</p>
+    <ul>
+            <li>
+                <blockquote>
+                        红扇表现出男儿的阳刚与力量，红穗表现出女子的温婉与柔美。
+                </blockquote>
+            </li>
+            <li>
+                <blockquote>
+                        美好的日子，迎来美好的生命。母女平安，谢谢大家。
+                </blockquote>
+            </li>
+            <li>
+                <blockquote>
+                        感谢导演，感谢优秀的团队，感谢真正的演员。
+                </blockquote>
+            </li>
+        </ul>
+        <p class="lead bg-danger">生活类新闻文本中的消极言论举例：</p>
+        <ul>
+                <li>
+                    <blockquote>
+                            我想接着跑，但我会觉得很尴尬，而且会担心人们取笑我。
+                    </blockquote>
+                </li>
+                <li>
+                    <blockquote>
+                            觉得没意思，毕业这么难，干脆退学了算了。
+                    </blockquote>
+                </li>
+                <li>
+                    <blockquote>
+                            我们穷人家的孩子，要想不被别人欺负，能靠什么呢？恨，拳头。
+                    </blockquote>
+                </li>
+            </ul>
+    <p class="lead">生活新闻文本积极句子积极与消极占比如下图所示：</p>
+    <div id="life" class="center-block" style="width: 400px;height:400px;" align="center"></div>
+    <p class="lead">生活新闻文本人物言论生成词云如下图所示：</p>
+    <div align="center"><img src="life.png" alt="" id="img4"></div>
+            </div>
+
+        </div>
+    <div class="row">
+        <h2>特定人物言论分析：</h2>
+        <p class="lead">此处选取习主席在新闻中提取出的58条进行言论分析。</p>
+        <div class="col-md-6">
+            <p class="lead bg-info">积极言论举例：</p>
+            <ul>
+            <li>
+                <blockquote>
+                        习近平强调，人人享有健康是全人类共同愿景，也是共建人类命运共同体的重要组成部分.
+                </blockquote>
+            </li>
+            <li>
+                <blockquote>
+                        我们不会忘记，在艰苦卓绝的卫国战争和抗日战争期间，中苏军民并肩作战、共同抗击法西斯侵略，用鲜血铸就了牢不可破的战斗情谊。
+                </blockquote>
+            </li>
+            </ul>
+            <p class="lead bg-danger">消极言论举例：</p>
+            <ul>
+            <li>
+                <blockquote>
+                        记得，习近平总书记曾经告诫党员干部，思想上的滑坡是最严重的病变，原因是“总开关”没拧紧。
+                </blockquote>
+            </li>
+            <li>
+                <blockquote>
+                        他强调，当前，我国改革发展形势正处于深刻变化之中，外部不确定不稳定因素增多，改革发展面临许多新情况新问题。
+                </blockquote>
+            </li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <p class="lead">积极句子与消极句子占比：</p>
+            <div id="xi" class="center-block" style="width: 400px;height:400px;" align="center"></div>
+            
+        </div>
+
+        
+    </div>
+    <div class="row">
+            <div class="col-md-10 center-block">
+            <br>
+            <p class="lead">
+                通过以上分析，可以简要看出虽然不同类别的新闻类别的人物言论中积极情感句和消极情感句的占比虽然不同，但都是积极情感句的占比偏多。这可以同新闻所担负的特殊职责有关。由于新闻是大多数人对时事和社会风气的认识的入口，新闻中的言论也担负了一定的引导作用，所以以上现象也是可以理解的。
+            </p>
+            </div>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+var option = {
+    series : [
+        {
+            name: '访问来源',
+            type: 'pie',
+            radius: '55%',
+            data:[
+                {value:1910, name:'积极情感句-74.68%'},
+                {value:657, name:'消极情感句-25.32%'},
+            ]
+        }
+    ]
+};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('ecnomic'));
+
+    // 指定图表的配置项和数据
+var option = {
+series : [
+    {
+        name: '访问来源',
+        type: 'pie',
+        radius: '55%',
+        data:[
+            {value:954, name:'积极情感句-82.03%'},
+            {value:209, name:'消极情感句-17.97%'},
+        ]
+    }
+]
+};
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('now'));
+
+    // 指定图表的配置项和数据
+var option = {
+series : [
+    {
+        name: '访问来源',
+        type: 'pie',
+        radius: '55%',
+        data:[
+            {value:409, name:'积极情感句-78.36%'},
+            {value:113, name:'消极情感句-21.64%'},
+        ]
+    }
+]
+};
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('life'));
+
+    // 指定图表的配置项和数据
+var option = {
+series : [
+    {
+        name: '访问来源',
+        type: 'pie',
+        radius: '55%',
+        data:[
+            {value:996, name:'积极情感句-82.05%'},
+            {value:218, name:'消极情感句-17.95%'},
+        ]
+    }
+]
+};
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('xi'));
+
+        // 指定图表的配置项和数据
+var option = {
+    series : [
+        {
+            name: '访问来源',
+            type: 'pie',
+            radius: '55%',
+            data:[
+                {value:0.9482, name:'积极情感句-94.82%'},
+                {value:0.0518, name:'消极情感句-%5.18'},
+            ]
+        }
+    ]
+};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+<style>
+img {
+    text-align: center;
+}
+</style>
+</html>
+
+
+
+
+
+
+    
+
+
+
+    

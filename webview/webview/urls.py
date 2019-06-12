@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from webpage import views as webpage_views
 
 urlpatterns = [
+    path('', webpage_views.index),
+    path('all.png', webpage_views.img1),
+    path('now.png', webpage_views.img2),
+    path('ecnomic.png', webpage_views.img3),
+    path('life.png', webpage_views.img4),
     path('admin/', admin.site.urls),
 ]

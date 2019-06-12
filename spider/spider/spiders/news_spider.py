@@ -93,6 +93,7 @@ class CurrentNewsSpider(scrapy.Spider):
 
 
 '''load_chosen.jsp?nodeids=25949&topCids=3385400,3388…3388463,3368844,&pageidx=5&lastTime=1556751771400
+load_index.jsp?nodeids=25462,25488,25489,25490,254…,3574240,3569707&pageidx=3&lastTime=1559272759008
 '''
 
 class NewsSpider(scrapy.Spider):
@@ -101,7 +102,7 @@ class NewsSpider(scrapy.Spider):
     def start_requests(self):
         urls = []
         for i in range(1,25):
-            urls.append("https://www.thepaper.cn/load_chosen.jsp?nodeids=25949&topCids=3390845,3390…3390754,3390716,&pageidx=" + str(i) +"&lastTime=1556883227362")
+            urls.append("https://www.thepaper.cn/load_chosen.jsp?nodeids=25949&topCids=3668169,3668…3668577,3664549,&pageidx=" + str(i) +"&lastTime=1560384505411")
         custom_settings = {
             'USER-AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36'
         }

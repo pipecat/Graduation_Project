@@ -1,9 +1,8 @@
-
-def get_data_and_labels(num):
+def get_data_and_labels(num, filepath):
     result_data = []
     result_labels = []
     i = 0
-    with open("txt/corpus.txt", 'r') as f:
+    with open(filepath, 'r') as f:
         for line in f:
             if i < num:
                 data = line.strip().split()
